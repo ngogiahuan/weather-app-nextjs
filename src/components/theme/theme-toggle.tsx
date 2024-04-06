@@ -6,9 +6,11 @@ import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import clsx from 'clsx'
 
 export function ModeToggle() {
   const { setTheme } = useTheme()
+  const currentTheme = useTheme().theme
 
   return (
     <DropdownMenu>
@@ -20,9 +22,24 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
+        <DropdownMenuItem
+          className={clsx(currentTheme === 'light' && 'bg-muted font-bold')}
+          onClick={() => setTheme('light')}
+        >
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className={clsx(currentTheme === 'dark' && 'bg-muted font-bold')}
+          onClick={() => setTheme('dark')}
+        >
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className={clsx(currentTheme === 'system' && 'bg-muted font-bold')}
+          onClick={() => setTheme('system')}
+        >
+          System
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
